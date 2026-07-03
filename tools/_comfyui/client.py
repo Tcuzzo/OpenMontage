@@ -47,12 +47,22 @@ class ComfyUIClient:
         return not os.environ.get("COMFYUI_SERVER_URL")
 
     def is_available(self) -> bool:
-        """Return True if the ComfyUI server is reachable."""
+        """Return True if the server is reachable AND is actually ComfyUI.
+
+        A bare HTTP 200 is not enough: other services squat well-known local
+        ports (e.g. Netdata answers 127.0.0.1:19999 with its dashboard), and
+        any web server would otherwise masquerade as a ComfyUI render node.
+        ComfyUI's /system_stats returns JSON with a top-level "system" object
+        (comfyui_version etc.) — require that marker.
+        """
         try:
             resp = requests.get(
                 f"{self.server_url}/system_stats", timeout=5
             )
-            return resp.status_code == 200
+            if resp.status_code != 200:
+                return False
+            payload = resp.json()
+            return isinstance(payload, dict) and isinstance(payload.get("system"), dict)
         except Exception:
             return False
 
