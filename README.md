@@ -721,3 +721,8 @@ make test
 If this project looks useful to you, a ⭐ would really mean a lot — it helps others discover it too.
 
 If you'd like to go further, [sponsor the project](https://github.com/sponsors/calesthio) — OpenMontage is built nights and weekends, and your support makes that sustainable.
+
+## Part of a family (Tcuzzo fork)
+
+This is Tcuzzo's fork of OpenMontage, based on calesthio/OpenMontage and maintained alongside a family of local-first, operator-owned agents.
+Sibling public repos: [HydraAgent_public - a local coding & ops agent](https://github.com/Tcuzzo/HydraAgent_public) and [bucks - a local-first trading agent (paper-first, you hold the keys)](https://github.com/Tcuzzo/bucks).
